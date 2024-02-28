@@ -1,0 +1,37 @@
+name: script
+
+on:
+  push:
+    paths:
+      - 'scripts/**'
+    branches:
+      - 'main'
+      - 'develop'
+  pull_request:
+    paths:
+      - 'scripts/**'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test:
+    runs-on:
+      - dev
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Poetry
+        id: poetry
+        uses: ./.github/actions/poetry/install
+
+      - name: Test
+        run: |
+          make pytest

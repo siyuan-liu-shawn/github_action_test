@@ -1,0 +1,81 @@
+name: cue-dump-dev
+
+on:
+  push:
+    paths:
+      - 'manifests/**.cue'
+      - 'manifests/**.avdl'
+    branches:
+      - "develop"
+  pull_request:
+    paths:
+      - 'manifests/**.cue'
+      - 'manifests/**.avdl'
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  cue:
+    runs-on:
+      - dev
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # Add safe.directory per https://github.com/actions/checkout/issues/766
+      - name: Setting repo parent dir as safe safe.directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        # TODO Error: Process completed with exit code 141.
+        # with:
+        #   files: |
+        #     manifests/**.cue
+
+      - name: Install Poetry
+        id: poetry
+        uses: ./.github/actions/poetry/install
+      - name: Install gcloud
+        id: gcloud
+        uses: ./.github/actions/gcp/install
+        with:
+          workload_identity_provider: projects/518261476924/locations/global/workloadIdentityPools/github-actions/providers/github-actions
+          service_account: argo-workflows-deployer@merpay-dataplatform-jp-dev.iam.gserviceaccount.com
+      - name: Install Avro
+        id: avro
+        uses: ./.github/actions/avro/install
+      - name: Install CUE
+        id: cue
+        uses: ./.github/actions/cue/install
+
+      - name: CUE eval
+        id: eval
+        run: |
+          echo "${{ steps.changed-files.outputs.all_changed_files }}" > ./all_changed_files
+          poetry run dp cue dump --debug --max-worker 10 --file ./all_changed_files
+
+      - name: CUE dump
+        id: dump
+        run: |
+          echo "${{ steps.changed-files.outputs.all_changed_files }}" > ./all_changed_files
+          poetry run dp cue dump --max-worker 10 --file ./all_changed_files >> $GITHUB_OUTPUT
+
+      - name: Upload manifests
+        id: upload
+        uses: ./.github/actions/cue/upload
+        with:
+          env: dev
+          exclude: prod
+          bucket: merpay-dataplatform-jp-dev-kubernetes
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dump_outputs: ${{ steps.dump.outputs.cue_files }}

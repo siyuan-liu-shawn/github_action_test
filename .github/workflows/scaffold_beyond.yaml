@@ -1,0 +1,77 @@
+name: scaffold-beyond
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment (dev or prod)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - prod
+      cloudsql_instance:
+        description: "CloudSQL instance name"
+        required: true
+      cloudsql_database:
+        description: "CloudSQL database name"
+        required: true
+      slack_channel:
+        description: "Slack channel name to notify when errors occur (Not required, if needed, e.g. #foobar)"
+        required: false
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  scaffold:
+    runs-on:
+      - dev
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Add safe.directory per https://github.com/actions/checkout/issues/766
+      - name: Setting repo parent dir as safe safe.directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Install Poetry
+        id: poetry
+        uses: ./.github/actions/poetry/install
+
+      - name: Scaffold
+        run: |
+          poetry run dp scaffold beyond \
+            --env "${{ github.event.inputs.env }}" \
+            --cloudsql-instance "${{ github.event.inputs.cloudsql_instance }}" \
+            --cloudsql-database "${{ github.event.inputs.cloudsql_database }}" \
+            --slack-channel "${{ github.event.inputs.slack_channel }}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Initial setup of CloudSQL batch pipeline for souzoh-beyond-jp-${{ github.event.inputs.cloudsql_database }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: initial-setup-cloudsql-batch-pipeline-souzoh-beyond-jp-${{ github.event.inputs.cloudsql_database }}
+          branch-suffix: timestamp
+          delete-branch: true
+          title: 'Initial setup of CloudSQL batch pipeline for souzoh-beyond-jp-${{ github.event.inputs.cloudsql_database }}'
+          body: |
+            Initial setup of CloudSQL batch pipeline for souzoh-beyond-jp-${{ github.event.inputs.cloudsql_database }}.
+            - [ ] Create a read replica instance for DataPlatfrom if necessary.
+                Example: https://github.com/kouzoh/microservices-terraform/pull/88833
+            - [ ] Create additional datasets.
+          labels: |
+            scaffold
+          assignees: ${{ github.actor }}
+          draft: false

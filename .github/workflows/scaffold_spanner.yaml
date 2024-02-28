@@ -1,0 +1,96 @@
+name: scaffold-spanner
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment (dev or prod)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - prod
+      service_id:
+        description: 'Microservice name (e.g. merpay-dataplatform-jp)'
+        required: true
+      short_service_id:
+        description: 'Microservice short name (e.g. mp-dp-jp)'
+        required: true
+      team_id:
+        description: "Team name (e.g. merpay-dataplatform-jp)"
+        required: true
+      spanner_project:
+        description: "Spanner project name with env (If the Spanner project is a different project from the microservice name. e.g. merpay-shard-spanner-jp-dev)"
+        required: false
+      spanner_instance:
+        description: "Spanner instance name"
+        required: true
+      spanner_database:
+        description: "Spanner database name"
+        required: true
+      slack_channel:
+        description: "Slack channel name to notify when errors occur (Not required, if needed, e.g. #foobar)"
+        required: false
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  scaffold:
+    runs-on:
+      - dev
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Add safe.directory per https://github.com/actions/checkout/issues/766
+      - name: Setting repo parent dir as safe safe.directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Install Poetry
+        id: poetry
+        uses: ./.github/actions/poetry/install
+
+      - name: Scaffold
+        run: |
+          poetry run dp scaffold spanner \
+            --env "${{ github.event.inputs.env }}" \
+            --service-id "${{ github.event.inputs.service_id }}" \
+            --short-service-id "${{ github.event.inputs.short_service_id }}" \
+            --team-id "${{ github.event.inputs.team_id }}" \
+            --spanner-instance "${{ github.event.inputs.spanner_instance }}" \
+            --spanner-database "${{ github.event.inputs.spanner_database }}" \
+            --spanner-project "${{ github.event.inputs.spanner_project }}" \
+            --slack-channel "${{ github.event.inputs.slack_channel }}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Initial setup of Spanner batch pipeline for ${{ github.event.inputs.service_id }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: initial-setup-spanner-batch-pipeline-${{ github.event.inputs.service_id }}
+          branch-suffix: timestamp
+          delete-branch: true
+          title: 'Initial setup of Spanner batch pipeline for ${{ github.event.inputs.service_id }}'
+          body: |
+            Initial setup of Spanner batch pipeline for ${{ github.event.inputs.service_id }}.
+            - [ ] Install [terraform-module-dataplatform](https://github.com/kouzoh/terraform-module-dataplatform) in your microservices.
+            - [ ] Request the reviewer to grant WRITER permissions to this repository to the team specified in the CODEOWNERS.
+          labels: |
+            scaffold
+          assignees: ${{ github.actor }}
+          # TODO: https://github.com/peter-evans/create-pull-request/issues/1835
+          # Error: Reviews may only be requested from collaborators. One or more of the teams you specified is not a collaborator of the kouzoh/dataplatform-kubernetes repository.
+          # team-reviewers: |
+          #   owners
+          draft: false

@@ -1,0 +1,100 @@
+name: javascript
+
+on:
+  push:
+    paths:
+      - 'javascript/**'
+    branches:
+      - "develop"
+    tags:
+      - 'javascript/v*'
+  pull_request:
+    paths:
+      - 'javascript/**'
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on:
+      - dev
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Poetry
+        id: poetry
+        uses: ./.github/actions/poetry/install
+        with:
+          working_directory: javascript/
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Test
+        working-directory: javascript/
+        run: |
+          make test
+
+  upload-dev:
+    if: github.ref == 'refs/heads/develop'
+    runs-on:
+      - dev
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install gcloud
+        id: gcloud
+        uses: ./.github/actions/gcp/install
+        with:
+          workload_identity_provider: projects/518261476924/locations/global/workloadIdentityPools/github-actions/providers/github-actions
+          service_account: argo-workflows-deployer@merpay-dataplatform-jp-dev.iam.gserviceaccount.com
+
+      - name: Upload
+        working-directory: javascript/
+        run:
+          gsutil -m rsync -r ./dev/ gs://merpay-dataplatform-jp-dev-dataflow/javascript/develop/
+
+  upload-prod:
+    if: github.ref_type == 'tag'
+    runs-on:
+      - prod
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install gcloud
+        id: gcloud
+        uses: ./.github/actions/gcp/install
+        with:
+          workload_identity_provider: projects/216572124863/locations/global/workloadIdentityPools/github-actions/providers/github-actions
+          service_account: argo-workflows-deployer@merpay-dataplatform-jp-prod.iam.gserviceaccount.com
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Upload
+        working-directory: javascript/
+        run:
+          gsutil -m rsync -r ./prod/ gs://merpay-dataplatform-jp-prod-dataflow/${{ env.RELEASE_VERSION }}/

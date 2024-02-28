@@ -1,0 +1,23 @@
+name: cue-install
+
+inputs:
+  platform:
+    required: false
+    default: linux
+  arch:
+    required: false
+    default: amd64
+  version:
+    required: false
+    default: v0.5.0
+
+runs:
+  using: composite
+  steps:
+
+    - name: Install CUE
+      shell: bash
+      run: |
+        mkdir -p $HOME/.local/bin/
+        curl -sSLf https://github.com/cue-lang/cue/releases/download/${{ inputs.version }}/cue_${{ inputs.version }}_${{ inputs.platform }}_${{ inputs.arch }}.tar.gz | tar zxvf - -C $HOME/.local/bin/
+        echo "$HOME/.local/bin" >> $GITHUB_PATH

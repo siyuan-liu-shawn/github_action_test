@@ -1,0 +1,47 @@
+name: bigquery-schema-migrations-prod
+
+on:
+  push:
+    paths:
+      - 'bigquery/migrations/**.sql'
+    branches:
+      - "main"
+  # TODO: dryrun
+  # pull_request:
+  #   paths:
+  #     - 'bigquery/migrations/**.sql'
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: migrate-prod
+
+jobs:
+  migrate-prod:
+    runs-on:
+      - prod
+      - standard
+      - self-hosted
+    container:
+      image: python:3.10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Poetry
+        id: poetry
+        uses: ./.github/actions/poetry/install
+      - name: Install gcloud
+        id: gcloud
+        uses: ./.github/actions/gcp/install
+        with:
+          workload_identity_provider: projects/216572124863/locations/global/workloadIdentityPools/github-actions/providers/github-actions
+          service_account: argo-workflows-deployer@merpay-dataplatform-jp-prod.iam.gserviceaccount.com
+
+      - name: Migrate
+        run: |
+          poetry run dp bq schema migrate -e prod -p kouzoh-analytics-jp-prod -d merpay_dataplatform_jp -t schema_history_v2 --parent-project merpay-dataplatform-jp-prod

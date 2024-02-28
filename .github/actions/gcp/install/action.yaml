@@ -1,0 +1,27 @@
+name: gcp-install
+
+inputs:
+  workload_identity_provider:
+    required: true
+  service_account:
+    required: true
+
+runs:
+  using: composite
+  steps:
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        create_credentials_file: true
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
+        service_account: ${{ inputs.service_account }}
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+
+    - name: Install crcmod
+      shell: bash
+      run: |-
+        python_path=$(gcloud info | grep "Python Location" | sed 's/.*\[\(.*\)\]/\1/g')
+        $python_path -m pip install -U crcmod

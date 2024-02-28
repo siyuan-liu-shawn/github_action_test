@@ -1,0 +1,29 @@
+name: avro-install
+
+inputs:
+  java_distribution:
+    required: false
+    default: 'temurin'
+  java_version:
+    required: false
+    default: '11'
+  avro_version:
+    required: false
+    default: '1.11.1'
+
+runs:
+  using: composite
+  steps:
+
+    - name: Setup java
+      uses: actions/setup-java@v3
+      with:
+        distribution: ${{ inputs.java_distribution }}
+        java-version: ${{ inputs.java_version }}
+
+    - name: Install avro-tools
+      shell: bash
+      run: |-
+        curl -sSLf https://repo1.maven.org/maven2/org/apache/avro/avro-tools/$AVRO_VERSION/avro-tools-$AVRO_VERSION.jar -o avro-tools.jar
+      env:
+        AVRO_VERSION: ${{ inputs.avro_version }}

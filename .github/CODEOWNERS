@@ -1,0 +1,406 @@
+* @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/kouzoh-data-transform-jp @kouzoh/merpay-data-management-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/kouzoh-data-transform-jp @kouzoh/merpay-data-management-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/mercari-api-jp @kouzoh/mercari-datastore-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/mercari-api-jp @kouzoh/mercari-datastore-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/kouzoh-crm-data-jp @kouzoh/merpay-data-management-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/kouzoh-crm-data-jp @kouzoh/merpay-data-management-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/mercari-crm-platform-jp @kouzoh/mercari-crm-backend-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/mercari-crm-platform-jp @kouzoh/mercari-crm-backend-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/mercari-autoreply-jp @kouzoh/mercari-contact-center-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/mercari-autoreply-jp @kouzoh/mercari-contact-center-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/mercari-post-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/mercari-post-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/kouzoh-kyc-request-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/kouzoh-kyc-request-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/mercari-pascal-jp @kouzoh/mercari-datastore-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/mercari-pascal-jp @kouzoh/mercari-datastore-jp @kouzoh/merpay-dataplatform-jp
+
+/pkg/microservices/mercari-api-log-sink-jp @kouzoh/mercari-sre-jp @kouzoh/merpay-dataplatform-jp
+/manifests/microservices/mercari-api-log-sink-jp @kouzoh/mercari-sre-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-contact-tool-jp @kouzoh/mercari-contact-center-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-contact-tool-jp @kouzoh/mercari-contact-center-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-toukibo-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-toukibo-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-partner-ope-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-partner-ope-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-reactions-jp @kouzoh/kouzoh-item-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-reactions-jp @kouzoh/kouzoh-item-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/souzoh-beyond-jp @kouzoh/souzoh-beyond-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/souzoh-beyond-jp @kouzoh/souzoh-beyond-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-listing-jp @kouzoh/mercari-listing-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-listing-jp @kouzoh/mercari-listing-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-credit-line-jp @kouzoh/merpay-credit-line-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-credit-line-jp @kouzoh/merpay-credit-line-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-cart-jp @kouzoh/mercari-cxo-be-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-cart-jp @kouzoh/mercari-cxo-be-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-transaction-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-transaction-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-item-filter-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-item-filter-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-bq-user-stats-jp @kouzoh/merpay-dashboard-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-bq-user-stats-jp @kouzoh/merpay-dashboard-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-logi-accounts-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-logi-accounts-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-pii-deletion-jp @kouzoh/mercari-privacy-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-pii-deletion-jp @kouzoh/mercari-privacy-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-settlement-jp @kouzoh/merpay-settlement-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-settlement-jp @kouzoh/merpay-settlement-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-charity-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-charity-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-work-jp @kouzoh/mercari-work-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-work-jp @kouzoh/mercari-work-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-proc-tracer-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-proc-tracer-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-braze-jp @kouzoh/merpay-crm-integrations-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-braze-jp @kouzoh/merpay-crm-integrations-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-bigbrother-jp @kouzoh/merpay-eng-productivity-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-bigbrother-jp @kouzoh/merpay-eng-productivity-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-authority @kouzoh/merpay-idp-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-authority @kouzoh/merpay-idp-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-santa-jp @kouzoh/merpay-growth-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-santa-jp @kouzoh/merpay-growth-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-mpm-issuer-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-mpm-issuer-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-merchant-delv-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-merchant-delv-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-consent-manage-jp @kouzoh/mercari-privacy-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-consent-manage-jp @kouzoh/mercari-privacy-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-item-watch-jp @kouzoh/mercari-tns-mod-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-item-watch-jp @kouzoh/mercari-tns-mod-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-desired-price-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-desired-price-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-kyc-history-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-kyc-history-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-searchadapter-jp @kouzoh/mercari-search-middleware-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-searchadapter-jp @kouzoh/mercari-search-middleware-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-shipping-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-shipping-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-gateway-jp @kouzoh/merpay-architect-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-gateway-jp @kouzoh/merpay-architect-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-ml-tm-mod-jp @kouzoh/mercari-contact-center-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-ml-tm-mod-jp @kouzoh/mercari-contact-center-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-campaign-jp @kouzoh/merpay-crm-campaign-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-campaign-jp @kouzoh/merpay-crm-campaign-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-partner-api-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-partner-api-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-meti-subsidy-jp @kouzoh/merpay-sre-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-meti-subsidy-jp @kouzoh/merpay-sre-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-debt-jp @kouzoh/merpay-balance-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-debt-jp @kouzoh/merpay-balance-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-corp-reviews-jp @kouzoh/mercari-people-products-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-corp-reviews-jp @kouzoh/mercari-people-products-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-payment-history-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-payment-history-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-kyc-ds-test-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-kyc-ds-test-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-merchant-apply-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-merchant-apply-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-kyc-datastore-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-kyc-datastore-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-partner-report-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-partner-report-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-np-admin-jp @kouzoh/merpay-netpayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-np-admin-jp @kouzoh/merpay-netpayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-wakai-jp @kouzoh/merpay-lending-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-wakai-jp @kouzoh/merpay-lending-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-saved-search-jp @kouzoh/mercari-search-middleware-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-saved-search-jp @kouzoh/mercari-search-middleware-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-pw-criticize-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-pw-criticize-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-product-catalog-jp @kouzoh/mercari-catalog-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-product-catalog-jp @kouzoh/mercari-catalog-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-pacman-jp @kouzoh/mercari-crossborder-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-pacman-jp @kouzoh/mercari-crossborder-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-np-megumi-jp @kouzoh/merpay-netpayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-np-megumi-jp @kouzoh/merpay-netpayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-user-social-jp @kouzoh/mercari-core-orion-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-user-social-jp @kouzoh/mercari-core-orion-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-deferred-pay-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-deferred-pay-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-nft-admin-api-jp @kouzoh/kouzoh-nft-backend-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-nft-admin-api-jp @kouzoh/kouzoh-nft-backend-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-item-discount-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-item-discount-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-portfolio-jp @kouzoh/merpay-cd-data-management-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-portfolio-jp @kouzoh/merpay-cd-data-management-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-card-gmopg-jp @kouzoh/merpay-realcard-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-card-gmopg-jp @kouzoh/merpay-realcard-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-michael-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-michael-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-mynumpoint-cpn-jp @kouzoh/merpay-growth-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-mynumpoint-cpn-jp @kouzoh/merpay-growth-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-deep-profiling-jp @kouzoh/mercari-deep-profiling-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-deep-profiling-jp @kouzoh/mercari-deep-profiling-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-user-account-jp @kouzoh/merpay-idp-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-user-account-jp @kouzoh/merpay-idp-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-bookkeeper-jp @kouzoh/merpay-balance-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-bookkeeper-jp @kouzoh/merpay-balance-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-admin-api-jp @kouzoh/merpay-cstool-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-admin-api-jp @kouzoh/merpay-cstool-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-credit-info-jp @kouzoh/merpay-credit-info-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-credit-info-jp @kouzoh/merpay-credit-info-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-draft-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-draft-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-item-attributes-jp @kouzoh/kouzoh-item-attributes-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-item-attributes-jp @kouzoh/kouzoh-item-attributes-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-ml-anomaly-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-ml-anomaly-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-acquirer-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-acquirer-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-acl-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-acl-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-home-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-home-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-wallet-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-wallet-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-notification-jp @kouzoh/kouzoh-item-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-notification-jp @kouzoh/kouzoh-item-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-api-jp @kouzoh/merpay-dashboard-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-api-jp @kouzoh/merpay-dashboard-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-admin-cs-api-jp @kouzoh/merpay-cstool-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-admin-cs-api-jp @kouzoh/merpay-cstool-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-screening-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-screening-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-bank-jp @kouzoh/merpay-cashio-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-bank-jp @kouzoh/merpay-cashio-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-partner-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-partner-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-inventory-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-inventory-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-aml-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-aml-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-aml-tct-server-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-aml-tct-server-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-eagle-insight-jp @kouzoh/kouzoh-shopping-media-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-eagle-insight-jp @kouzoh/kouzoh-shopping-media-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-qac-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-qac-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-account-mod-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-account-mod-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-kyc-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-kyc-jp @kouzoh/mercari-kyc-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-login-record-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-login-record-jp @kouzoh/mercari-camp5-cre-tns-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-gateway-jp @kouzoh/kouzoh-network-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-gateway-jp @kouzoh/kouzoh-network-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/souzoh-shops-resources-jp @kouzoh/souzoh-beyond-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/souzoh-shops-resources-jp @kouzoh/souzoh-beyond-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-p2p-transfer-jp @kouzoh/merpay-dashboard-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-p2p-transfer-jp @kouzoh/merpay-dashboard-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-likes-jp @kouzoh/mercari-cxo-be-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-likes-jp @kouzoh/mercari-cxo-be-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-jpqr-mapper-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-jpqr-mapper-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-similar-item-jp @kouzoh/mercari-recommendation-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-similar-item-jp @kouzoh/mercari-recommendation-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-segx-jp @kouzoh/merpay-crm-campaign-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-segx-jp @kouzoh/merpay-crm-campaign-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-fraudprevention-jp @kouzoh/merpay-fraudprevention-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-fraudprevention-jp @kouzoh/merpay-fraudprevention-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-event-tracker-jp @kouzoh/kouzoh-item-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-event-tracker-jp @kouzoh/kouzoh-item-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-analytics-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-analytics-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-search-aggr-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-search-aggr-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-admin-mod-jp @kouzoh/mercari-tns-mod-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-admin-mod-jp @kouzoh/mercari-tns-mod-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-help-center-jp @kouzoh/mercari-help-center-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-help-center-jp @kouzoh/mercari-help-center-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-issuer-api-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-issuer-api-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-coupon-jp @kouzoh/merpay-growth-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-coupon-jp @kouzoh/merpay-growth-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-admin-authz-jp @kouzoh/mercari-cs-foundation-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-admin-authz-jp @kouzoh/mercari-cs-foundation-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-docbell-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-docbell-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-japanpost-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-japanpost-jp @kouzoh/mercari-logi-backend-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-aml-judge-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-aml-judge-jp @kouzoh/merpay-aml-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-nft-shop-api-jp @kouzoh/kouzoh-nft-backend-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-nft-shop-api-jp @kouzoh/kouzoh-nft-backend-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-paymentprovider-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-paymentprovider-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-item-analytics-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-item-analytics-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-adjust-data-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-adjust-data-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-balance-jp @kouzoh/merpay-balance-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-balance-jp @kouzoh/merpay-balance-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-query-suggest-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-query-suggest-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-loyalty-jp @kouzoh/merpay-loyalty-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-loyalty-jp @kouzoh/merpay-loyalty-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-netpayment-jp @kouzoh/merpay-netpayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-netpayment-jp @kouzoh/merpay-netpayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-admin-gateway-jp @kouzoh/kouzoh-network-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-admin-gateway-jp @kouzoh/kouzoh-network-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-payment-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-payment-jp @kouzoh/merpay-payment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-kando-listing-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-kando-listing-jp @kouzoh/mercari-cxo-se-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-3d-secure-jp @kouzoh/merpay-realcard-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-3d-secure-jp @kouzoh/merpay-realcard-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-cdc-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-cdc-jp @kouzoh/merpay-dataplatform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-incentive-hub-jp @kouzoh/merpay-incentive-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-incentive-hub-jp @kouzoh/merpay-incentive-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-lending-jp @kouzoh/merpay-lending-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-lending-jp @kouzoh/merpay-lending-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-search-tag-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-search-tag-jp @kouzoh/mercari-search-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-topup-jp @kouzoh/merpay-cashio-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-topup-jp @kouzoh/merpay-cashio-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-admin-ms-api-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-admin-ms-api-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-merchant-master-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-merchant-master-jp @kouzoh/merpay-partner-platform-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/mercari-user-recommend-jp @kouzoh/mercari-recommendation-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/mercari-user-recommend-jp @kouzoh/mercari-recommendation-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/kouzoh-nfc-jp @kouzoh/kouzoh-nfc-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/kouzoh-nfc-jp @kouzoh/kouzoh-nfc-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-merchant-api-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-merchant-api-jp @kouzoh/merpay-codepayment-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-invoice-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-invoice-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp
+
+/manifests/microservices/merpay-admin-sp-api-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp
+/pkg/microservices/merpay-admin-sp-api-jp @kouzoh/merpay-credit-design-jp @kouzoh/merpay-dataplatform-jp

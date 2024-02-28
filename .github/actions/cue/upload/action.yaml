@@ -1,0 +1,51 @@
+name: cue-upload
+
+inputs:
+  env:
+    required: true
+  exclude:
+    required: true
+  bucket:
+    required: true
+  github_token:
+    required: true
+  dump_outputs:
+    required: true
+
+runs:
+  using: composite
+  steps:
+
+    - name: Upload manifests
+      shell: bash
+      run: |-
+        if [ "$BRANCH_NAME" != "main" ] && [ "$BRANCH_NAME" != "develop" ]; then
+          BRANCH_NAME=branches/$BRANCH_NAME
+        fi
+        gsutil -m rsync -c -r -x ".*platform/${{ inputs.exclude }}/.*|.*microservices/.*/${{ inputs.exclude }}/.*" \
+          ./manifests gs://${{ inputs.bucket }}/$BRANCH_NAME/manifests
+      env:
+        BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
+    - name: Comment
+      if: github.ref != 'refs/heads/main' && github.event_name == 'pull_request'
+      shell: bash
+      run: |
+        if [ "$BRANCH_NAME" != "main" ] && [ "$BRANCH_NAME" != "develop" ]; then
+          BRANCH_NAME=branches/$BRANCH_NAME
+        fi
+        all_changed_files="${{ inputs.dump_outputs }}"
+        all_changed_files_length=${#all_changed_files}
+        echo $all_changed_files_length
+        if [ "$all_changed_files_length" -lt 10000 ]; then
+          poetry run dp github create-dump-cue-comment \
+            --env ${{ inputs.env }} \
+            --pr-number ${{ github.event.number }} \
+            --bucket ${{ inputs.bucket }} \
+            --branch $BRANCH_NAME \
+            --exclude ".*platform/${{ inputs.exclude }}/.*|.*microservices/.*/${{ inputs.exclude }}/.*" \
+            ${{ inputs.dump_outputs }}
+        fi
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
