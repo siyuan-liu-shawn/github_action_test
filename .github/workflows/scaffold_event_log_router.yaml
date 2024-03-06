@@ -20,12 +20,6 @@ on:
       team_id:
         description: "Team name (e.g. merpay-dataplatform-jp)"
         required: true
-      project_number:
-        description: "GCP project number (e.g. 518261476924)"
-        required: true
-      slack_channel:
-        description: "Slack channel name to notify when errors occur (Not required, if needed, e.g. #foobar)"
-        required: false
 
 permissions:
   id-token: write
@@ -58,35 +52,24 @@ jobs:
             --env "${{ github.event.inputs.env }}" \
             --service-id "${{ github.event.inputs.service_id }}" \
             --short-service-id "${{ github.event.inputs.short_service_id }}" \
-            --team-id "${{ github.event.inputs.team_id }}" \
-            --project-number "${{ github.event.inputs.project_number }}" \
-            --cloudsql-kind "${{ github.event.inputs.cloudsql_kind }}" \
-            --cloudsql-region "asia-northeast1" \
-            --cloudsql-instance "${{ github.event.inputs.cloudsql_instance }}" \
-            --cloudsql-database "${{ github.event.inputs.cloudsql_database }}" \
-            --slack-channel "${{ github.event.inputs.slack_channel }}"
+            --team-id "${{ github.event.inputs.team_id }}" \\
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Initial setup of CloudSQL batch pipeline for ${{ github.event.inputs.service_id }}
+          commit-message: Initial setup of event log router stream pipeline for ${{ github.event.inputs.service_id }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: initial-setup-cloudsql-batch-pipeline-${{ github.event.inputs.service_id }}
+          branch: initial-setup-event-log-router-stream-pipeline-${{ github.event.inputs.service_id }}
           branch-suffix: timestamp
           delete-branch: true
-          title: 'Initial setup of CloudSQL batch pipeline for ${{ github.event.inputs.service_id }}'
+          title: 'Initial setup of event log router stream pipeline for ${{ github.event.inputs.service_id }}'
           body: |
-            Initial setup of CloudSQL batch pipeline for ${{ github.event.inputs.service_id }}.
+            Initial setup of event log router stream pipeline for ${{ github.event.inputs.service_id }}.
             - [ ] Install [terraform-module-dataplatform](https://github.com/kouzoh/terraform-module-dataplatform) in your microservices.
-            - [ ] Create a CloudSQL user for DataPlatform.
-                Example: https://github.com/kouzoh/microservices-terraform/pull/88880
-            - [ ] Set CloudSQL username and password in the secret manager created by terraform-module-dataplatform.
-                Example: https://github.com/kouzoh/microservices-terraform/pull/104438
-            - [ ] Create a read replica instance for DataPlatfrom if necessary.
-                Example: https://github.com/kouzoh/microservices-terraform/pull/88833
+            - [ ] Enable the `enable_stream_pipeline_routing` flag in erraform-module-dataplatform.tf.
             - [ ] Request the reviewer to grant WRITER permissions to this repository to the team specified in the CODEOWNERS.
           labels: |
             scaffold

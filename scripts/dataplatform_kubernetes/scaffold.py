@@ -289,6 +289,20 @@ def _generate_event_log_cue_files(config: ScaffoldEventLogConfig) -> None:
             f.write("\n")
 
 
+def _generate_event_log_router_cue_files(config: ScaffoldConfig) -> None:
+    env_dir = _get_env_dir(config)
+    output_dir = env_dir / "flink" / "event-log-router"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for name, path in [
+        ("event_log_router.cue", "event_log_router/event_log_router.cue.jinja2"),
+        ("delivery.cue", "event_log_router/delivery.cue.jinja2"),
+    ]:
+        template = TEMPLATE_ENV.get_template(path)
+        with open((output_dir / name), "wt", encoding="utf-8") as f:
+            f.write(template.render(config=config))
+            f.write("\n")
+
+
 def _update_codeowners(service_id: str, team_id: str) -> None:
     codeowners = BASE_DIR / ".github" / "CODEOWNERS"
     append = textwrap.dedent(
@@ -474,5 +488,28 @@ def event_log(
     )
     _generate_metadata_cue_files(config)
     _generate_event_log_cue_files(config)
+    _update_codeowners(service_id, team_id)
+    _make_pkg_dir(service_id)
+
+@scaffold.command("event-log-router")
+@click.option("--env", type=click.Choice(ENVIRONMENTS))
+@click.option("--service-id", type=str, required=True, callback=validate_service_id)
+@click.option("--short-service-id", type=str, required=True, callback=validate_service_id)
+@click.option("--team-id", type=str, required=True, callback=validate_service_id)
+@click.pass_obj
+def event_log_router(
+        ctx: ContextArgument,
+        env: str,
+        service_id: str,
+        short_service_id: str,
+        team_id: str,
+) -> None:
+    config = ScaffoldConfig(
+        env,
+        service_id,
+        short_service_id,
+    )
+    _generate_metadata_cue_files(config)
+    _generate_event_log_router_cue_files(config)
     _update_codeowners(service_id, team_id)
     _make_pkg_dir(service_id)

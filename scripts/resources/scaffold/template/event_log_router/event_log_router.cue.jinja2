@@ -1,0 +1,87 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform"
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/flink/config"
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform/flink/operator/v1beta1"
+)
+
+FlinkEventLogRouterParameter: v1beta1.#FlinkDeploymentParameter & {
+
+	metadata: Metadata
+
+	image:             Metadata.cdc_datapipeline_image
+	image_version:     Metadata.cdc_datapipeline_version
+	image_pull_policy: Metadata.image_pull_policy
+
+	service_account: Microservice.service_account_name
+	datadog_secret:  "datadog-secret"
+
+	use_secret_manager: true
+
+	restart_nonce:          1
+	flink_version:          "v1_16"
+	mode:                   "standalone"
+	checkpointing_interval: "5 sec"
+	checkpointing_timeout:  "3 min"
+	jobmanager: {
+		resource: {
+			cpu:    1
+			memory: 4Gi
+		}
+		replicas: 2
+	}
+	taskmanager: {
+		resource: {
+			cpu:    1
+			memory: 2048M
+		}
+	}
+	job: {
+		name:        "event-log-router"
+		entry_class: platform.#FlinkMainClass.FlinkEventLogRouter
+		parallelism: 2
+	}
+}
+
+FlinkEventLogRouter: v1beta1.#FlinkDeployment & {
+	metadata:        Metadata
+	parameters:      FlinkEventLogRouterParameter
+	pipeline_config: config.#EventLogRouterConfig & {
+		pipelines: [
+			config.#EventLogRouterPipelineConfig & {
+				in: config.#EventLogPubSubSourceConfig & {
+					project:               "{{ config.service_id }}-{{ config.env }}"
+					subscription:          "ramp_streamdatapipeline_routing"
+					maxMessagePerPull:     500
+					maxInboundMessageSize: 4194304
+					maxAttempts:           5
+					shutdownTimeout:       15
+				}
+				out: [
+					config.#EventLogRouterGcsSinkConfig & {
+						dest: config.#EventLogGcsSinkConfig & {
+							basePath: "gs://mp-dp-jp-prod-raw-datalake-asia-single/job_id={{ config.service_id }}-eventlog/"
+						}
+						sideOutputs: [
+							config.#EventLogBigQuerySideOutput & {
+								condition: config.#EventLogCondition & {
+									logNameIsIn: ["mercari.platform.item_watch.log.ViolationLog"]
+								}
+								dest: config.#EventLogBigQuerySinkConfig & {
+									project:            "kouzoh-analytics-jp-{{ config.env }}"
+									dataset:            "{{ config.service_id }}"
+									table:              PLEASE_SET_YOUR_TABLE
+									includeMetaData:    true
+									descriptor:         PLEASE_SET_YOUR_DESCRIPTOR
+									writersPerTable:    4
+									concurrentRequests: 4
+								}
+							},
+						]
+					},
+				]
+			},
+		]
+	}
+}
