@@ -1,0 +1,13 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform/argo-workflows/config"
+)
+
+SemaphoreConfig: config.#SemaphoreConfigMap & {
+	metadata: Metadata
+	name:     Microservice.semaphore_configmap_name
+	slots: {
+		"dataflow-slots": "5"
+	}
+}

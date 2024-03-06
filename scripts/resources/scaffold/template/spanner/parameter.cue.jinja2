@@ -1,0 +1,17 @@
+package kubernetes
+
+import (
+	workflow_v2 "github.com/kouzoh/dataplatform-kubernetes/pkg/platform/argo-workflows/workflow/v2"
+)
+
+Parameter: workflow_v2.#BatchDataPipelineDefaultDataflowParameter & {
+	batch_datapipeline_image:   Metadata.batch_datapipeline_image
+	batch_datapipeline_version: Metadata.batch_datapipeline_version
+	semaphore:                  Microservice.semaphore_configmap_name
+	service_account:            Microservice.service_account_name
+	load_service_account:       Microservice.service_account_name
+	connection_config_name:     "conn-{{ config.spanner_database }}.yaml"
+	{%- if config.slack_channel %}
+	slack_channel:              "{{  config.slack_channel }}"
+	{%- endif %}
+}

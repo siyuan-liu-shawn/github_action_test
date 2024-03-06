@@ -1,0 +1,23 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform"
+	workflow_v2 "github.com/kouzoh/dataplatform-kubernetes/pkg/platform/argo-workflows/workflow/v2"
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform/argo-workflows/config"
+)
+
+InformationSchema: X=workflow_v2.#BatchDataPipelineDefaultDataflowConfig & {
+	database: CloudSQL."{{ config.cloudsql_database }}".database_id
+	table:    "information_schema"
+	input:    config.#DataflowJdbcToAvroInputConfig & {
+		query: platform.#InformationSchema.CloudSQL.PostgreSQL.query
+	}
+	outputs: [
+		config.#BigQueryOutputConfig & {
+			project:           Microservice.analytics_project
+			dataset:           Microservice.analytics_dataset
+			{% raw %}table:             "\(X.table)_cloudsql\\${{ execution_date.strftime(\"%Y%m%d\") }}"{% endraw %}
+			write_disposition: "WRITE_APPEND"
+		},
+	]
+}

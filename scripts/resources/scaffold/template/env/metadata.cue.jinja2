@@ -1,0 +1,9 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform"
+)
+
+Metadata: {
+	environment: {% if config.env == "dev" %}platform.#Development{% else %}platform.#Production{% endif %}
+}

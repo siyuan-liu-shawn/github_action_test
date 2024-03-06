@@ -1,0 +1,14 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/delivery"
+)
+
+Delivery: delivery.Delivery & {
+	resources: [
+		workflow_daily.workflow,
+		workflow_daily.config,
+		workflow_hourly.workflow,
+		workflow_hourly.config,
+	]
+}

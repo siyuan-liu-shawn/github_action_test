@@ -1,0 +1,13 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/microservices"
+)
+
+Spanner: microservices.#Spanner & {
+	"{{ config.spanner_database }}": {
+		project_id:  {% if not config.spanner_project or config.project == config.spanner_project %}Metadata.project{% else %}"{{ config.spanner_project }}"{% endif %}
+		instance_id: "{{ config.spanner_instance }}"
+		database_id: "{{ config.spanner_database }}"
+	}
+}

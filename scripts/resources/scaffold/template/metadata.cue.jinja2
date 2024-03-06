@@ -1,0 +1,16 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/k8s"
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/microservices"
+)
+
+Metadata: k8s.#Metadata & {
+	service_id:       "{{ config.service_id }}"
+	short_service_id: "{{ config.short_service_id }}"
+}
+
+Microservice: X=microservices.#Microservice & {
+	metadata: Metadata
+	subnetwork: "https://www.googleapis.com/compute/v1/projects/\(X.metadata.project)/regions/asia-northeast1/subnetworks/default-network"
+}

@@ -1,0 +1,12 @@
+package kubernetes
+
+import (
+	"strings"
+)
+
+Microservice: X={
+	analytics_dataset: strings.Replace("\(X.metadata.service_id)-\(X.db_server_name)", "-", "_", -1)
+
+	db_server_name: "{{ config.cloudsql_database }}" // {{ config.cloudsql_instance }}
+	db_dbname:      "{{ config.cloudsql_database }}"
+}

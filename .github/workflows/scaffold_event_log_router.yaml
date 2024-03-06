@@ -23,20 +23,6 @@ on:
       project_number:
         description: "GCP project number (e.g. 518261476924)"
         required: true
-      cloudsql_kind:
-        description: 'CloudSQL kind (mysql or postgresql)'
-        required: true
-        default: 'mysql'
-        type: choice
-        options:
-          - mysql
-          - postgresql
-      cloudsql_instance:
-        description: "CloudSQL instance name"
-        required: true
-      cloudsql_database:
-        description: "CloudSQL database name"
-        required: true
       slack_channel:
         description: "Slack channel name to notify when errors occur (Not required, if needed, e.g. #foobar)"
         required: false

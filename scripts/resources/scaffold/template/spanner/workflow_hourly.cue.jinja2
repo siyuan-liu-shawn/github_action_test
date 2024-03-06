@@ -1,0 +1,22 @@
+package kubernetes
+
+import (
+	"strings"
+
+	workflow_v2 "github.com/kouzoh/dataplatform-kubernetes/pkg/platform/argo-workflows/workflow/v2"
+)
+
+workflow_hourly: X=workflow_v2.#BatchDataPipelineDefaultDataflowCronWorkflow & {
+	name:       strings.ToLower(strings.Replace("\(Metadata.short_service_id)-spanner-\(Spanner."{{ config.spanner_database }}".database_id)-hourly", "_", "-", -1))
+	metadata:   Metadata
+	parameters: Parameter & {
+		configmap: "\(X.metadata.name)"
+	}
+	configs: workflow_v2.#BatchDataPipelineDefaultDataflowConfigs & {
+		configs: [
+
+		]
+	}
+	workflow: spec: schedule:                "0 * * * *"
+	workflow: spec: startingDeadlineSeconds: 1800
+}

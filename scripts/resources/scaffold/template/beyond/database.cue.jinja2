@@ -1,0 +1,18 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/microservices"
+)
+
+CloudSQL: microservices.#CloudSQL & {
+	"{{ config.cloudsql_database }}": {
+		kind:            "postgresql"
+		region:          "asia-northeast1"
+		project_id:      Metadata.project
+		instance_id:     "{{ config.cloudsql_instance }}"
+		database_id:     "{{ config.cloudsql_database }}"
+		user_name:       "dataplatform"
+		password_env:    "CLOUDSQL_PASSWORD"
+		crypto_key_name: Microservice.crypto_key_name
+	}
+}

@@ -1,0 +1,18 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/microservices"
+)
+
+CloudSQL: microservices.#CloudSQL & {
+	"{{ config.cloudsql_database }}": {
+		kind:             "{{ config.cloudsql_kind }}"
+		region:           "{{ config.cloudsql_region }}"
+		project_id:       {% if not config.cloudsql_project or config.project == config.cloudsql_project %}Metadata.project{% else %}"{{ config.cloudsql_project }}"{% endif %}
+		instance_id:      "{{ config.cloudsql_instance }}"
+		database_id:      "{{ config.cloudsql_database }}"
+		password_secret:  "projects/{{ config.project_number }}/secrets/merpay-dataplatform-jp-cloudsql-password/versions/latest"
+		user_name_secret: "projects/{{ config.project_number }}/secrets/merpay-dataplatform-jp-cloudsql-username/versions/latest"
+		crypto_key_name:  Microservice.crypto_key_name
+	}
+}

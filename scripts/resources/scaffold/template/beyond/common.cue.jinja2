@@ -1,0 +1,26 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform/argo-workflows/config"
+)
+
+CommonConfig: {
+	conn_config: {
+		"conn-{{ config.cloudsql_database }}.yaml": config.#CloudSQLConnectionConfig & {
+			kind:            CloudSQL."{{ config.cloudsql_database }}".kind
+			project:         CloudSQL."{{ config.cloudsql_database }}".project_id
+			region:          CloudSQL."{{ config.cloudsql_database }}".region
+			instance_id:     CloudSQL."{{ config.cloudsql_database }}".instance_id
+			database_id:     CloudSQL."{{ config.cloudsql_database }}".database_id
+			user_name:       CloudSQL."{{ config.cloudsql_database }}".user_name
+			password_env:    CloudSQL."{{ config.cloudsql_database }}".password_env
+			crypto_key_name: CloudSQL."{{ config.cloudsql_database }}".crypto_key_name
+		}
+	}
+}
+
+SemaphoreConfig: {
+	slots: {
+		"dataflow-slots-{{ config.cloudsql_database }}": "5"
+	}
+}

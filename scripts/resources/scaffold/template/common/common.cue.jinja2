@@ -1,0 +1,65 @@
+package kubernetes
+
+import (
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform"
+	"github.com/kouzoh/dataplatform-kubernetes/pkg/platform/argo-workflows/config"
+	dataflow_template "github.com/kouzoh/dataplatform-kubernetes/pkg/dataflow/template"
+)
+
+DataflowEnvironmentConfig: config.#DataflowEnvironmentConfig & {
+	service_account_email: Microservice.batch_pipeline_service_account_email
+	max_workers:           100
+	machine_type:          platform.#N1Standard{% if config.env == "dev" %}2{% else %}8{% endif %}
+    temp_location:         {% raw %}"gs://{{ bucket }}/tmp/workflow_name={{ workflow_name }}/database={{ database }}/table={{ table }}/year={{ scheduled_time.strftime(\"%Y\") }}/month={{ scheduled_time.strftime(\"%-m\") }}/day={{ scheduled_time.strftime(\"%-d\") }}/hour={{ scheduled_time.strftime(\"%-H\") }}/{{ scheduled_time.strftime(\"%Y%m%d%H%M%S\") }}/"{% endraw %}
+	subnetwork:            Microservice.subnetwork
+}
+
+CommonConfig: X=config.#CommonConfig & {
+	metadata: Metadata
+	name:     Microservice.common_configmap_name
+	state_config: {
+		"state.yaml": config.#BigQueryStateConfig & {
+			parent_project: Metadata.parent_project
+			project:        Microservice.analytics_project
+			dataset:        Microservice.analytics_dataset
+			location:       {% raw %}"{{ microservice }}.{{ database }}.{{ table }}__{{ output }}"{% endraw %}
+		}
+	}
+	compute_config: {
+		"compute.yaml": config.#DataflowDefaultComputeConfig & {
+			template:        {{ config.template }}
+			output_location: {% raw %}"gs://{{ bucket }}/workflow_name={{ workflow_name }}/database={{ database }}/table={{ table }}/year={{ scheduled_time.strftime(\"%Y\") }}/month={{ scheduled_time.strftime(\"%-m\") }}/day={{ scheduled_time.strftime(\"%-d\") }}/hour={{ scheduled_time.strftime(\"%-H\") }}/{{ scheduled_time.strftime(\"%Y%m%d%H%M%S\") }}-"{% endraw %}
+			output_key:      {% raw %}"workflow_name={{ workflow_name }}/database={{ database }}/table={{ table }}/year={{ scheduled_time.strftime(\"%Y\") }}/month={{ scheduled_time.strftime(\"%-m\") }}/day={{ scheduled_time.strftime(\"%-d\") }}/hour={{ scheduled_time.strftime(\"%-H\") }}/{{ scheduled_time.strftime(\"%Y%m%d%H%M%S\") }}-"{% endraw %}
+			bucket:          Microservice.bucket
+			environment:     DataflowEnvironmentConfig
+			job_name:        {% raw %}"{{ workflow_name.replace(\"_\", \"-\") }}-{{ database }}-{{ table }}-{{ scheduled_time.strftime(\"%Y%m%d%H%M%S\") }}"{% endraw %}
+		}
+		"compute-secure.yaml": config.#DataflowDefaultComputeConfig & {
+			template:        {{ config.template }}
+			output_location: {% raw %}"gs://{{ bucket }}/workflow_name={{ workflow_name }}/database={{ database }}/table={{ table }}/year={{ scheduled_time.strftime(\"%Y\") }}/month={{ scheduled_time.strftime(\"%-m\") }}/day={{ scheduled_time.strftime(\"%-d\") }}/hour={{ scheduled_time.strftime(\"%-H\") }}/{{ scheduled_time.strftime(\"%Y%m%d%H%M%S\") }}-"{% endraw %}
+			output_key:      {% raw %}"workflow_name={{ workflow_name }}/database={{ database }}/table={{ table }}/year={{ scheduled_time.strftime(\"%Y\") }}/month={{ scheduled_time.strftime(\"%-m\") }}/day={{ scheduled_time.strftime(\"%-d\") }}/hour={{ scheduled_time.strftime(\"%-H\") }}/{{ scheduled_time.strftime(\"%Y%m%d%H%M%S\") }}-"{% endraw %}
+			bucket:          Microservice.bucket
+			environment:     DataflowEnvironmentConfig
+			datalake:        platform.#Datalake.batch_secure_single[X.metadata.environment]
+			job_name:        {% raw %}"{{ workflow_name.replace(\"_\", \"-\") }}-{{ database }}-{{ table }}-{{ scheduled_time.strftime(\"%Y%m%d%H%M%S\") }}"{% endraw %}
+		}
+	}
+	conn_config: {
+		{% if config.type == "spanner" -%}
+		"conn-{{ config.spanner_database }}.yaml": config.#SpannerConnectionConfig & {
+			project:     Spanner."{{ config.spanner_database }}".project_id
+			instance_id: Spanner."{{ config.spanner_database }}".instance_id
+			database_id: Spanner."{{ config.spanner_database }}".database_id
+		}
+		{%- elif config.type == "cloudsql" -%}
+		"conn-{{ config.cloudsql_database }}.yaml": config.#CloudSQLConnectionConfig & {
+			kind:             CloudSQL."{{ config.cloudsql_database }}".kind
+			project:          CloudSQL."{{ config.cloudsql_database }}".project_id
+			region:           CloudSQL."{{ config.cloudsql_database }}".region
+			instance_id:      CloudSQL."{{ config.cloudsql_database }}".instance_id
+			database_id:      CloudSQL."{{ config.cloudsql_database }}".database_id
+			user_name_secret: CloudSQL."{{ config.cloudsql_database }}".user_name_secret
+			password_secret:  CloudSQL."{{ config.cloudsql_database }}".password_secret
+		}{%- endif %}
+	}
+}
